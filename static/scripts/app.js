@@ -8,8 +8,19 @@ angular.module("MyHackPad", ['textAngular'])
             $scope.orightml = 'Enter text here.';
 
             $scope.$watch('htmlcontent',function(newValue, oldValue){
-              // diff_worker.onTextChange();
+              // var data = {"oldValue" : oldValue,
+              //             "newValue" : newValue,
+              //             "username" : "MyUser"};
+              //
+              // console.log("app : oldVal" + data.oldValue);
+              // console.log("app : newVal" + data.newValue);
+              // console.log("app : userVal" + data.username);
 
+diff_worker.postMessage([oldValue , newValue , userName="MyUser"]);
+
+diff_worker.onmessage = function(ev){
+  console.log("message Returned : "+ ev);
+    };
               // console.log("old : "+ oldValue);
               // console.log("new : "+ newValue);
 

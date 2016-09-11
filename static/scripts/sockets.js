@@ -1,13 +1,25 @@
+importScripts('socket.io.js');
 
-var url = 'http://' + document.domain + ':' + location.port;
+
+var url = 'http://' + '127.0.0.1' + ':' + location.port;
+
 var socket = io.connect(url + "/MyHackPad");
+
+  // console.log(url);
+  // console.log(socket);
 
 
 sendDiff = function(diff)
 {
-  socket.emit('receiveDiff' , { "username" : diff.data[0] ,
-                                "difference" : diff.data[1] ,
-                                "TextValue" : diff.data[2],
+  console.log("sending data through the socket");
+  console.log("username" + diff.username + "\n" +
+              "difference" + diff.difference +"\n" +
+              "TextValue" + diff.TextValue+"\n" +
+              "timestamp" + new Date().getTime());
+
+  socket.emit('receiveDiff' , { "username" : diff.username ,
+                                "difference" : diff.difference ,
+                                "TextValue" : diff.TextValue,
                                 "timestamp" : new Date().getTime()
                               });
 

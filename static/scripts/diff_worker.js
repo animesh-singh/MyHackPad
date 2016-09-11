@@ -3,14 +3,25 @@ importScripts('sockets.js');
 
 var sentDiffs = 0;
 
-onTextChange = function(ev){
+onmessage = function(ev){
   var dmp = new diff_match_patch();
+
+  console.log("diff_worker : ")
+
+
+  // console.log(ev.data[1]);
+  // console.log(ev.data[2]);
+  // console.log(ev.data[0]);
+
   var previous_text = ev.data[1];
   var current_text = ev.data[2];
   var username = ev.data[0];
 
   //take the diff
   var diff = dmp.diff_main(previous_text, current_text);
+
+  console.log(diff);
+
 
   if (diff.length > 2) {
      dmp.diff_cleanupSemantic(diff);
@@ -26,6 +37,8 @@ onTextChange = function(ev){
         "difference" : patch_list ,
         "TextValue" :  current_text
       });
+
+    postMessage("data has been sent");
 
   }
 }
