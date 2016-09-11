@@ -1,5 +1,5 @@
 importScripts('diff_match_patch_uncompressed.js');
-importScripts('sockets.js');
+
 
 var sentDiffs = 0;
 
@@ -7,15 +7,13 @@ onmessage = function(ev){
   var dmp = new diff_match_patch();
 
   console.log("diff_worker : ")
+  console.log(ev.data[0]);
+  console.log(ev.data[1]);
+  console.log(ev.data[2]);
 
-
-  // console.log(ev.data[1]);
-  // console.log(ev.data[2]);
-  // console.log(ev.data[0]);
-
-  var previous_text = ev.data[1];
-  var current_text = ev.data[2];
-  var username = ev.data[0];
+  var previous_text = ev.data[0];
+  var current_text = ev.data[1];
+  var username = ev.data[2];
 
   //take the diff
   var diff = dmp.diff_main(previous_text, current_text);
@@ -32,13 +30,11 @@ onmessage = function(ev){
 
   // pass the patch back to main thread
   if(patch_list.length > 0){
-    sendDiff (
+    postMessage (
       { "username" :   username ,
-        "difference" : patch_list ,
+        "patchText" : patch_list ,
         "TextValue" :  current_text
       });
-
-    postMessage("data has been sent");
-
+    
   }
 }
