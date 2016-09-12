@@ -10,8 +10,16 @@ onmessage = function(ev){
   var patch = ev.data["patch"];
   
   //apply the patch
+  console.log("current text : "+currentText);
+  console.log("Patch : ");
+  console.log(patch);
+  
 
   var results = dmp.patch_apply(patch, currentText);
+  
+  console.log("Patch has been applied");
+  console.log(results[0]);
+  console.log(results[1]);
   
   postMessage([username, results[0]]);
 }

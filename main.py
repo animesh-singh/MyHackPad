@@ -12,6 +12,7 @@ client = MongoClient('mongodb://localhost:27017/')
 db = client['MyHackPadDB']
 commits = db.commit_log
 users = db.users
+usersConnected = 1
 
 
 # Connection settings for flask-socketio
@@ -42,19 +43,13 @@ if __name__ == '__main__':
 
 
 
-# Socket connections
-# global usersConnected 
-usersConnected= 0;
-
 @socketio.on('connect', namespace='/MyHackPad')
 def ws_conn():
-	# usersConnected=1
     socketio.emit('userCount',{"count":usersConnected, "status" : "OK"},namespace = "/MyHackPad")
 
 
 @socketio.on('disconnect', namespace='/MyHackPad')
 def ws_conn():
-	# usersConnected=1
     socketio.emit('userCount',{"count":usersConnected , "status" : "OK"},namespace = "/MyHackPad")
 
 

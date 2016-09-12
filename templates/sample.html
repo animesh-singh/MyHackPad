@@ -15,14 +15,18 @@
   <body>
     <div class ="container">
     <h2> Welcome to MyHackPad, a Realtime Collaborative Text-Editor</h2>
-    <h3> <span ng-model="userCount"> </span> users currently editing this document</h3>
+    <h3> <span ng-model="userCount"> 0 </span> users currently editing this document</h3>
   </div>
     <br><hr>
+    
     <div ng-app = "MyHackPad" ng-controller="texteditor" class="container app" >
 
-      <div text-angular="text-angular" name="htmlcontent" ng-model="htmlcontent" ng-change="onChange()" ta-disabled='disabled'></div>
+      <div  text-angular="text-angular" name="htmlcontent" ng-model="htmlcontent" id= "updateText">
+         <p> <h2>Enter text here. </h2></p>
+      </div>
 
     </div>
+
   </body>
 
   <script type="text/javascript" src ='https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js'></script>
@@ -30,6 +34,7 @@
   <script type="text/javascript" src ='static/textAngular/dist/textAngular-sanitize.min.js'></script>
   <script type="text/javascript" src ='static/textAngular/dist/textAngular.min.js'></script>
   <script type="text/javascript" src ='static/socket.io-client/socket.io.js'></script>
+  <script type="text/javascript" src ='static/scripts/socket.js'></script>
   <script type="text/javascript" src ='static/scripts/app.js'></script>
 
 
